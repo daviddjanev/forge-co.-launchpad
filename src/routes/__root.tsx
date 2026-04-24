@@ -1,6 +1,8 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { CustomCursor } from "@/components/CustomCursor";
+import { GrainOverlay } from "@/components/GrainOverlay";
 
 function NotFoundComponent() {
   return (
@@ -71,5 +73,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <GrainOverlay />
+      <CustomCursor />
+    </>
+  );
 }

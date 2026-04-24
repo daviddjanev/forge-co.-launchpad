@@ -1,10 +1,13 @@
 import { HumanoidScene } from "./HumanoidScene";
+import { SplitText } from "./SplitText";
+import { useMagnetic } from "@/hooks/use-magnetic";
 
 interface HeroProps {
   onContactClick: () => void;
 }
 
 export function Hero({ onContactClick }: HeroProps) {
+  const ctaRef = useMagnetic<HTMLSpanElement>(0.4);
   return (
     <section id="top" className="relative min-h-screen overflow-hidden">
       {/* Background radial */}
@@ -28,12 +31,20 @@ export function Hero({ onContactClick }: HeroProps) {
 
         <div className="grid lg:grid-cols-12 gap-8 mt-10 items-center">
           <div className="lg:col-span-7 relative z-10">
-            <h1 className="font-display text-[15vw] md:text-[8.5rem] xl:text-[10rem] leading-[0.86] tracking-tight animate-fade-up">
-              Forge
+            <h1 className="font-display text-[15vw] md:text-[8.5rem] xl:text-[10rem] leading-[0.86] tracking-tight">
+              <SplitText stagger={0.07}>
+                <>Forge</>
+              </SplitText>
               <br />
-              <em className="text-gradient-gold not-italic">conversations</em>
+              <em className="text-gradient-gold not-italic">
+                <SplitText delay={0.25} stagger={0.07}>
+                  <>conversations</>
+                </SplitText>
+              </em>
               <br />
-              that convert.
+              <SplitText delay={0.55} stagger={0.07}>
+                <>that convert.</>
+              </SplitText>
             </h1>
             <p
               className="mt-8 max-w-xl text-lg text-muted-foreground leading-relaxed animate-fade-up"
@@ -48,13 +59,15 @@ export function Hero({ onContactClick }: HeroProps) {
               className="mt-10 flex flex-wrap items-center gap-4 animate-fade-up"
               style={{ animationDelay: "0.3s" }}
             >
-              <button
-                onClick={onContactClick}
-                className="group inline-flex items-center gap-3 rounded-full bg-gradient-gold text-primary-foreground px-7 py-4 hover:shadow-gold transition-shadow"
-              >
-                <span className="font-medium">Start a project</span>
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </button>
+              <span ref={ctaRef} className="inline-block will-change-transform">
+                <button
+                  onClick={onContactClick}
+                  className="group inline-flex items-center gap-3 rounded-full bg-gradient-gold text-primary-foreground px-7 py-4 hover:shadow-gold transition-shadow"
+                >
+                  <span className="font-medium">Start a project</span>
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </button>
+              </span>
               <a
                 href="#services"
                 className="inline-flex items-center gap-3 rounded-full border border-border px-7 py-4 hover:border-gold hover:text-gold transition-colors"
