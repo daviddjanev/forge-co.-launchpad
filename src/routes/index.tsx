@@ -43,19 +43,23 @@ const services: ServicePanelData[] = [
       "Custom voice agents that book calls, qualify leads, and handle support 24/7 — sounding like the best person on your team, not a bot reading a script.",
     businessValue: {
       heading: "Capture every lead, day and night.",
-      body: "Our agents pick up in under two seconds, qualify intent, and book directly into your calendar. No missed revenue. No voicemail black holes.",
+      body: "",
+      tags: ["24/7", "<2s pickup", "Books direct"],
     },
     ourAdvantage: {
       heading: "Brand-true voice & tone.",
-      body: "We tune cadence, vocabulary and personality to match your brand. Customers feel they're speaking to your best rep — not a generic assistant.",
+      body: "",
+      tags: ["Custom cadence", "On-brand", "Human-like"],
     },
     executionTools: {
-      heading: "Vapi · ElevenLabs · Twilio · n8n.",
-      body: "Best-in-class voice infrastructure stitched into your CRM, calendar and Slack. Observable, testable and version-controlled.",
+      heading: "Best-in-class voice stack.",
+      body: "",
+      tags: ["Vapi", "ElevenLabs", "Twilio", "n8n"],
     },
     useCases: {
       heading: "Real-estate · Clinics · Agencies.",
-      body: "Inbound qualification, appointment setting, after-hours triage, recurring follow-ups, and outbound reactivation campaigns.",
+      body: "",
+      tags: ["Inbound", "Booking", "Triage", "Follow-ups"],
     },
   },
   {
@@ -71,19 +75,23 @@ const services: ServicePanelData[] = [
       "Editorial-grade websites engineered for speed and conversion. Custom motion, considered typography, and a CMS your team will actually enjoy using.",
     businessValue: {
       heading: "Premium positioning, instantly.",
-      body: "Look like the category leader. Our clients consistently report higher close rates and bigger deal sizes after launch.",
+      body: "",
+      tags: ["Higher AOV", "Better close", "Category leader"],
     },
     ourAdvantage: {
       heading: "Designed in-house, end-to-end.",
-      body: "No handoffs to template farms. Strategy, art direction, motion and engineering live under one roof — and one taste level.",
+      body: "",
+      tags: ["Strategy", "Art direction", "Engineering"],
     },
     executionTools: {
-      heading: "React · TanStack · Three.js · Sanity.",
-      body: "Modern, performant stacks. SSR-ready, accessibility-aware, and tuned for Core Web Vitals scores in the high 90s.",
+      heading: "Modern, performant stack.",
+      body: "",
+      tags: ["React", "TanStack", "Three.js", "Sanity"],
     },
     useCases: {
-      heading: "Marketing sites · Portfolios · DTC.",
-      body: "Funded startup launches, agency rebrands, product narrative pages, and high-AOV ecommerce experiences.",
+      heading: "Marketing · Portfolio · DTC.",
+      body: "",
+      tags: ["Launches", "Rebrands", "Narrative", "Ecom"],
     },
   },
   {
@@ -99,19 +107,23 @@ const services: ServicePanelData[] = [
       "Identity systems, automation pipelines and lifecycle flows that make your business feel coherent — from a cold DM to a renewal email.",
     businessValue: {
       heading: "Less manual work, more margin.",
-      body: "Automate the busywork around lead-gen, onboarding and reporting. Free your team to do the work clients actually pay for.",
+      body: "",
+      tags: ["Lead-gen", "Onboarding", "Reporting"],
     },
     ourAdvantage: {
       heading: "A studio that thinks in systems.",
-      body: "We design brand and ops as one. Visual identity, voice, and workflows are built so they reinforce each other — not fight.",
+      body: "",
+      tags: ["Brand + ops", "Coherent", "Reinforcing"],
     },
     executionTools: {
-      heading: "Figma · n8n · Make · Notion · Linear.",
-      body: "Lightweight, observable automations layered on top of the tools you already use. No bloated agency-only platforms.",
+      heading: "Lightweight automation stack.",
+      body: "",
+      tags: ["Figma", "n8n", "Make", "Notion", "Linear"],
     },
     useCases: {
       heading: "Rebrands · Onboarding · Reporting.",
-      body: "Identity refreshes, automated client onboarding, weekly KPI rollups, and AI-augmented internal knowledge bases.",
+      body: "",
+      tags: ["Identity", "Workflows", "KPIs", "Knowledge"],
     },
   },
 ];
@@ -138,7 +150,7 @@ function Index() {
       />
 
       <section id="services" className="relative">
-        <div className="container-x max-w-[1400px] mx-auto pt-24 pb-10">
+        <div className="container-x max-w-[1400px] mx-auto pt-24 pb-16">
           <div className="flex items-baseline justify-between gap-6 flex-wrap">
             <div>
               <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -151,13 +163,13 @@ function Index() {
               </h2>
             </div>
             <p className="max-w-sm text-muted-foreground">
-              Scroll through how we work — voice, web and the systems that hold them together.
+              Scroll — each discipline stacks into view.
             </p>
           </div>
         </div>
 
         {services.map((s, i) => (
-          <ServicePanel key={s.number} data={s} index={i} />
+          <ServicePanel key={s.number} data={s} index={i} total={services.length} />
         ))}
       </section>
 
