@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="oklch(0.92 0.10 88)"/>
+      <stop offset="55%" stop-color="oklch(0.82 0.14 82)"/>
+      <stop offset="100%" stop-color="oklch(0.62 0.13 70)"/>
+    </linearGradient>
+  </defs>
+  <polygon points="20,4 44,4 60,20 60,44 44,60 20,60 4,44 4,20" fill="url(#g)"/>
+  <text x="32" y="44" text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="34" font-style="italic" font-weight="400"
+    fill="oklch(0.14 0.012 60)">&amp;</text>
+</svg>
