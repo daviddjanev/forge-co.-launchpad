@@ -3,6 +3,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { CustomCursor } from "@/components/CustomCursor";
 import { GrainOverlay } from "@/components/GrainOverlay";
+import { PageCurtain } from "@/components/PageCurtain";
 
 function NotFoundComponent() {
   return (
@@ -78,6 +79,7 @@ function RootComponent() {
       <Outlet />
       <GrainOverlay />
       <CustomCursor />
+      <PageCurtain />
     </>
   );
 }
