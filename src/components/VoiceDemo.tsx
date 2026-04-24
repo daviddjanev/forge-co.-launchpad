@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Mic, MicOff, Loader2 } from "lucide-react";
+import { SilverSurferScene } from "./SilverSurferScene";
 
 /**
  * Voice agent demo block.
