@@ -131,7 +131,7 @@ export function ContactPanel({ open, onClose }: ContactPanelProps) {
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-2">
                 Studio
               </div>
-              <p className="text-foreground">Lisbon · Remote</p>
+              <p className="text-foreground">North Macedonia · Remote</p>
             </div>
           </div>
         </div>

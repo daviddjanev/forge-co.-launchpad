@@ -175,13 +175,13 @@ function Index() {
           </div>
           <div className="grid md:grid-cols-2 gap-6 mt-10">
             {[
-              { client: "Atelier Noma", tag: "Voice agent · Hospitality", note: "+38% bookings in 60 days" },
-              { client: "Helio Health", tag: "Web · Brand", note: "Series A launch site" },
-              { client: "Verde Capital", tag: "Voice · Automation", note: "After-hours qualification" },
-              { client: "Studio Marble", tag: "Web · Motion", note: "Portfolio rebuild" },
-            ].map((w) => (
+              { client: "Under NDA", tag: "Voice agent · Hospitality", note: "Case study coming soon" },
+              { client: "Coming Soon", tag: "Web · Brand", note: "Launch in progress" },
+              { client: "Under NDA", tag: "Voice · Automation", note: "Case study coming soon" },
+              { client: "Coming Soon", tag: "Web · Motion", note: "Launch in progress" },
+            ].map((w, i) => (
               <div
-                key={w.client}
+                key={i}
                 className="group p-8 rounded-2xl border border-border bg-surface hover:border-gold/50 transition-colors"
               >
                 <div className="flex items-baseline justify-between gap-4">
@@ -203,7 +203,7 @@ function Index() {
       <Marquee
         items={[
           "Now booking · Q3 2026",
-          "Lisbon · Remote worldwide",
+          "North Macedonia · Remote worldwide",
           "Available for select partnerships",
           "hello@forgeand.co",
           "Voice · Web · Brand",

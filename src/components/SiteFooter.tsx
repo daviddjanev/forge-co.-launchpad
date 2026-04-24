@@ -30,15 +30,12 @@ export function SiteFooter({ onContactClick }: SiteFooterProps) {
               <a href="mailto:hello@forgeand.co" className="link-reveal block">
                 hello@forgeand.co
               </a>
-              <a href="tel:+351000000000" className="link-reveal block mt-1 text-muted-foreground">
-                +351 000 000 000
-              </a>
             </div>
             <div>
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-3">
                 Studio
               </div>
-              <p>Lisbon, PT</p>
+              <p>North Macedonia</p>
               <p className="text-muted-foreground">Remote, worldwide</p>
             </div>
             <div>
@@ -46,7 +43,7 @@ export function SiteFooter({ onContactClick }: SiteFooterProps) {
                 Social
               </div>
               <a className="link-reveal block" href="#">LinkedIn</a>
-              <a className="link-reveal block" href="#">Instagram</a>
+              <a className="link-reveal block" href="https://instagram.com/forgeandco.mk" target="_blank" rel="noopener noreferrer">Instagram</a>
               <a className="link-reveal block" href="#">Dribbble</a>
             </div>
             <div>
