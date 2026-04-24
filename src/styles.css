@@ -334,6 +334,12 @@
   animation: split-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   will-change: transform;
 }
+.split-gradient-gold .split-word-inner {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 @keyframes split-rise {
   to { transform: translateY(0); }
 }
