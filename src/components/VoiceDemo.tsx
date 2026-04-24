@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Mic, MicOff, Loader2 } from "lucide-react";
+import { SilverSurferScene } from "./SilverSurferScene";
 
 /**
  * Voice agent demo block.
@@ -75,6 +76,11 @@ export function VoiceDemo() {
 
   const isLive = status === "live";
   const isConnecting = status === "connecting";
+  // Average bar amplitude → drives the surfer's reactivity
+  const level = useMemo(
+    () => (isLive ? bars.reduce((a, b) => a + b, 0) / bars.length : 0),
+    [bars, isLive],
+  );
 
   return (
     <section
@@ -136,23 +142,28 @@ export function VoiceDemo() {
                 </span>
               </div>
 
-              {/* Visualizer */}
-              <div className="mt-10 h-40 flex items-end justify-center gap-[6px]">
-                {bars.map((h, i) => (
-                  <span
-                    key={i}
-                    className={`w-1.5 rounded-full transition-colors ${
-                      isLive ? "bg-gold" : "bg-border-strong"
-                    }`}
-                    style={{
-                      height: `${(isLive ? h : 0.12) * 100}%`,
-                      transition: isLive
-                        ? "height 80ms linear"
-                        : "height 400ms cubic-bezier(0.22,1,0.36,1)",
-                      opacity: isLive ? 0.6 + h * 0.4 : 0.5,
-                    }}
-                  />
-                ))}
+              {/* Visualizer — gold Silver Surfer reacting to the agent */}
+              <div className="mt-8 relative h-[340px] md:h-[400px] rounded-2xl border border-border/60 bg-gradient-to-b from-surface/40 to-background/20 overflow-hidden">
+                <div className="absolute inset-0 bg-radial-gold opacity-40 pointer-events-none" />
+                <SilverSurferScene level={level} speaking={isLive} />
+                <div className="absolute bottom-3 left-4 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground/70">
+                  <span className={`h-1 w-1 rounded-full ${isLive ? "bg-gold animate-glow-pulse" : "bg-border-strong"}`} />
+                  {isLive ? "Agent · listening" : "Agent · standby"}
+                </div>
+                {/* Slim waveform strip below the bust */}
+                <div className="absolute bottom-0 left-0 right-0 h-10 flex items-end justify-center gap-[3px] px-6 pb-2 pointer-events-none">
+                  {bars.map((h, i) => (
+                    <span
+                      key={i}
+                      className={`w-[2px] rounded-full ${isLive ? "bg-gold" : "bg-border-strong"}`}
+                      style={{
+                        height: `${(isLive ? h : 0.12) * 100}%`,
+                        opacity: isLive ? 0.5 + h * 0.5 : 0.4,
+                        transition: isLive ? "height 80ms linear" : "height 400ms cubic-bezier(0.22,1,0.36,1)",
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Control */}
