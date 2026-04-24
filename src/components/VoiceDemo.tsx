@@ -76,6 +76,11 @@ export function VoiceDemo() {
 
   const isLive = status === "live";
   const isConnecting = status === "connecting";
+  // Average bar amplitude → drives the surfer's reactivity
+  const level = useMemo(
+    () => (isLive ? bars.reduce((a, b) => a + b, 0) / bars.length : 0),
+    [bars, isLive],
+  );
 
   return (
     <section
