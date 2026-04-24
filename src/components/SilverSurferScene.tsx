@@ -18,7 +18,8 @@ import * as THREE from "three";
  * once the ElevenLabs agent is wired); `speaking` toggles the glow.
  */
 
-const MODEL_URL = "/models/silver_surfer.glb";
+const MODEL_URL =
+  "https://raw.githubusercontent.com/daviddjanev/silver-surfer1/refs/heads/main/silver_surfer.glb";
 useGLTF.preload(MODEL_URL);
 
 function SurferModel({ level, speaking }: { level: number; speaking: boolean }) {
