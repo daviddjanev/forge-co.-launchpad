@@ -1,3 +1,5 @@
+import { ThemeToggle } from "./ThemeToggle";
+
 interface SiteHeaderProps {
   onContactClick: () => void;
 }
@@ -20,21 +22,26 @@ export function SiteHeader({ onContactClick }: SiteHeaderProps) {
           <a href="#services" className="link-reveal hover:text-foreground transition-colors">
             Services
           </a>
+          <a href="#demo" className="link-reveal hover:text-foreground transition-colors">
+            Demo
+          </a>
           <a href="#work" className="link-reveal hover:text-foreground transition-colors">
             Work
           </a>
-          <a href="#studio" className="link-reveal hover:text-foreground transition-colors">
-            Studio
-          </a>
         </nav>
 
-        <button
-          onClick={onContactClick}
-          className="group inline-flex items-center gap-3 rounded-full border border-gold/50 bg-background/40 backdrop-blur px-5 py-2.5 hover:bg-gradient-gold hover:text-primary-foreground hover:border-transparent transition-all"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-gold group-hover:bg-primary-foreground animate-glow-pulse" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.25em]">Start a project</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={onContactClick}
+            className="group inline-flex items-center gap-3 rounded-full border border-gold/50 bg-background/40 backdrop-blur px-5 py-2.5 hover:bg-gradient-gold hover:text-primary-foreground hover:border-transparent transition-all"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-gold group-hover:bg-primary-foreground animate-glow-pulse" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em]">
+              Start a project
+            </span>
+          </button>
+        </div>
       </div>
     </header>
   );

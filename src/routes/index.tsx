@@ -6,6 +6,8 @@ import { Marquee } from "@/components/Marquee";
 import { ServicePanel, type ServicePanelData } from "@/components/ServicePanel";
 import { ContactPanel } from "@/components/ContactPanel";
 import { SiteFooter } from "@/components/SiteFooter";
+import { VoiceDemo } from "@/components/VoiceDemo";
+import { FilamentDivider } from "@/components/FilamentDivider";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -158,6 +160,12 @@ function Index() {
           <ServicePanel key={s.number} data={s} index={i} />
         ))}
       </section>
+
+      <FilamentDivider label="Try it" />
+
+      <VoiceDemo />
+
+      <FilamentDivider label="Selected work" />
 
       {/* Spacer so last sticky panel can release before footer */}
       <section id="work" className="relative bg-background border-t border-border">

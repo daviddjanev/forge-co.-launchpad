@@ -1,5 +1,6 @@
 import { HumanoidScene } from "./HumanoidScene";
 import { SplitText } from "./SplitText";
+import { CountUp } from "./CountUp";
 import { useMagnetic } from "@/hooks/use-magnetic";
 
 interface HeroProps {
@@ -94,7 +95,9 @@ export function Hero({ onContactClick }: HeroProps) {
             ["EU · US", "Time zones covered"],
           ].map(([k, v]) => (
             <div key={v}>
-              <div className="numeral text-3xl text-gold">{k}</div>
+              <div className="numeral text-3xl text-gold">
+                <CountUp value={k} />
+              </div>
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mt-2">
                 {v}
               </div>
