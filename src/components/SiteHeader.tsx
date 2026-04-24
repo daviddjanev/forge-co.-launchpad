@@ -1,4 +1,5 @@
 import { ThemeToggle } from "./ThemeToggle";
+import { BrandMark } from "./BrandMark";
 
 interface SiteHeaderProps {
   onContactClick: () => void;
@@ -8,13 +9,10 @@ export function SiteHeader({ onContactClick }: SiteHeaderProps) {
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="container-x max-w-[1400px] mx-auto flex items-center justify-between py-5">
-        <a href="#top" className="flex items-center gap-3 group">
-          <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40">
-            <span className="absolute inset-1 rounded-full bg-gradient-gold opacity-90" />
-            <span className="relative font-display text-primary-foreground text-sm">F</span>
-          </span>
+        <a href="#top" className="flex items-center gap-3 group" aria-label="Forge & Co. — home">
+          <BrandMark size={38} title="Forge & Co." className="transition-transform duration-500 group-hover:rotate-[22.5deg]" />
           <span className="font-display text-lg tracking-tight">
-            Forge <span className="text-gold">&</span> Co.
+            Forge <span className="text-gold italic">&</span> Co.
           </span>
         </a>
 
