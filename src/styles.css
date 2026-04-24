@@ -399,3 +399,65 @@
   .split-word-inner { transform: none; animation: none; }
   .grain-overlay { animation: none; }
 }
+
+/* ---------- Scroll reveal items ---------- */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+  will-change: opacity, transform;
+}
+.service-panel[data-reveal="in"] .reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Page-load curtain ---------- */
+.curtain-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 51%;
+  background: linear-gradient(180deg, oklch(0.1 0.012 60), oklch(0.18 0.014 60));
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.curtain-top { top: 0; }
+.curtain-bottom { bottom: 0; }
+.curtain-out .curtain-top { transform: translateY(-100%); }
+.curtain-out .curtain-bottom { transform: translateY(100%); }
+.curtain-mark {
+  animation: fade-in 0.6s ease-out 0.1s both;
+}
+.curtain-out .curtain-mark {
+  animation: fade-out 0.4s ease-out forwards;
+}
+
+/* ---------- Filament divider ---------- */
+.filament-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.filament-in {
+  stroke-dashoffset: 0;
+}
+.filament-mark {
+  opacity: 0;
+  transform-origin: center;
+  transition:
+    opacity 0.5s ease 0.9s,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.9s;
+}
+.filament-mark-in {
+  opacity: 1;
+  transform: translate(500px, 6px) rotate(45deg) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item { opacity: 1; transform: none; transition: none; }
+  .curtain-panel { transition: none; }
+  .filament-line { stroke-dashoffset: 0; transition: none; }
+  .filament-mark { opacity: 1; transition: none; }
+}
