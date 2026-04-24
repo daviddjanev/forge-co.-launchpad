@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BrandMark } from "./BrandMark";
 
 /**
  * Gold-on-ink entrance curtain. Drops away on first paint, then unmounts
@@ -33,12 +34,15 @@ export function PageCurtain() {
     >
       <div className="curtain-panel curtain-top" />
       <div className="curtain-panel curtain-bottom" />
-      <div className="relative z-10 flex items-center gap-3 curtain-mark">
-        <span className="h-px w-10 bg-gold" />
-        <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-gold">
-          Forge & Co.
-        </span>
-        <span className="h-px w-10 bg-gold" />
+      <div className="relative z-10 flex flex-col items-center gap-5 curtain-mark">
+        <BrandMark size={72} />
+        <div className="flex items-center gap-3">
+          <span className="h-px w-10 bg-gold" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-gold">
+            Forge &amp; Co.
+          </span>
+          <span className="h-px w-10 bg-gold" />
+        </div>
       </div>
     </div>
   );
