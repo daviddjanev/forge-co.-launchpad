@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useInView } from "@/hooks/use-in-view";
 
 export interface ServiceCard {
   heading: string;
@@ -22,11 +23,13 @@ interface ServicePanelProps {
 }
 
 export function ServicePanel({ data, index }: ServicePanelProps) {
+  const { ref, inView } = useInView<HTMLElement>({ threshold: 0.25 });
   return (
     <section
-      className="sticky top-0 min-h-screen w-full bg-background border-t border-border"
+      ref={ref}
+      data-reveal={inView ? "in" : "out"}
+      className="service-panel sticky top-0 min-h-screen w-full bg-background border-t border-border"
       style={{
-        // Stack effect: each subsequent panel sits slightly higher
         paddingTop: `${4 + index * 0.5}rem`,
       }}
     >
@@ -43,7 +46,7 @@ export function ServicePanel({ data, index }: ServicePanelProps) {
         </div>
 
         <div className="grid lg:grid-cols-12 gap-10 mt-12">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 reveal-item" style={{ ["--d" as any]: "0ms" }}>
             <h2 className="font-display text-5xl md:text-6xl xl:text-7xl leading-[0.95]">
               {data.title}
             </h2>
@@ -53,10 +56,18 @@ export function ServicePanel({ data, index }: ServicePanelProps) {
           </div>
 
           <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-            <Card label="Business value" data={data.businessValue} accent />
-            <Card label="Our advantage" data={data.ourAdvantage} />
-            <Card label="Execution tools" data={data.executionTools} />
-            <Card label="Use cases" data={data.useCases} />
+            <div className="reveal-item" style={{ ["--d" as any]: "120ms" }}>
+              <Card label="Business value" data={data.businessValue} accent />
+            </div>
+            <div className="reveal-item" style={{ ["--d" as any]: "200ms" }}>
+              <Card label="Our advantage" data={data.ourAdvantage} />
+            </div>
+            <div className="reveal-item" style={{ ["--d" as any]: "280ms" }}>
+              <Card label="Execution tools" data={data.executionTools} />
+            </div>
+            <div className="reveal-item" style={{ ["--d" as any]: "360ms" }}>
+              <Card label="Use cases" data={data.useCases} />
+            </div>
           </div>
         </div>
       </div>

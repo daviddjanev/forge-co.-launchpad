@@ -1,39 +1,44 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, MeshDistortMaterial } from "@react-three/drei";
-import { useRef, Suspense, useMemo } from "react";
+import { useRef, Suspense, useMemo, useEffect, useState } from "react";
 import * as THREE from "three";
 
 /**
  * Reactive voice orb — a distorted sphere whose surface and scale
- * pulse to a synthesized "voice" waveform (layered sine waves).
- * Used as the on-brand replacement for the humanoid figure.
+ * pulse to a synthesized "voice" waveform AND react to the cursor:
+ * - cursor position tilts the orb toward the pointer
+ * - clicks trigger a brief distortion burst
  */
-function VoiceOrb() {
+function VoiceOrb({ pulse }: { pulse: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const matRef = useRef<any>(null);
   const innerRef = useRef<THREE.Mesh>(null);
+  const { pointer } = useThree();
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    // Synthesized voice envelope: layered sines for organic speech-like motion
     const env =
       Math.sin(t * 2.1) * 0.5 +
       Math.sin(t * 5.3 + 1.2) * 0.3 +
       Math.sin(t * 11.7 + 0.6) * 0.2;
     const amp = (env + 1) / 2; // 0..1
+    const burst = pulse; // 0..1, decays in parent
 
     if (meshRef.current) {
-      const s = 1 + amp * 0.07;
+      const s = 1 + amp * 0.07 + burst * 0.12;
       meshRef.current.scale.set(s, s, s);
-      meshRef.current.rotation.y = t * 0.2;
-      meshRef.current.rotation.x = Math.sin(t * 0.4) * 0.15;
+      // Smoothly tilt toward cursor
+      const targetY = pointer.x * 0.6 + t * 0.2;
+      const targetX = -pointer.y * 0.4 + Math.sin(t * 0.4) * 0.15;
+      meshRef.current.rotation.y += (targetY - meshRef.current.rotation.y) * 0.06;
+      meshRef.current.rotation.x += (targetX - meshRef.current.rotation.x) * 0.06;
     }
     if (matRef.current) {
-      matRef.current.distort = 0.32 + amp * 0.18;
-      matRef.current.speed = 1.5 + amp * 1.5;
+      matRef.current.distort = 0.32 + amp * 0.18 + burst * 0.35;
+      matRef.current.speed = 1.5 + amp * 1.5 + burst * 4;
     }
     if (innerRef.current) {
-      const s = 0.55 + amp * 0.12;
+      const s = 0.55 + amp * 0.12 + burst * 0.2;
       innerRef.current.scale.set(s, s, s);
     }
   });
@@ -136,21 +141,49 @@ function WaveformRings() {
 }
 
 export function HumanoidScene() {
+  const [pulse, setPulse] = useState(0);
+  const pulseRef = useRef(0);
+
+  // Decay loop for click burst
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      pulseRef.current *= 0.92;
+      if (pulseRef.current < 0.001) pulseRef.current = 0;
+      setPulse(pulseRef.current);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const trigger = () => {
+    pulseRef.current = 1;
+    setPulse(1);
+  };
+
   return (
-    <Canvas
-      camera={{ position: [0, 0, 5.5], fov: 42 }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
+    <div
+      className="h-full w-full cursor-pointer"
+      onPointerDown={trigger}
+      role="button"
+      aria-label="Pulse the voice orb"
     >
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[3, 5, 4]} intensity={1.4} color="#fff1d0" />
-        <directionalLight position={[-3, 2, -2]} intensity={0.6} color="#e9c275" />
-        <pointLight position={[0, 2, 3]} intensity={1} color="#f5d28a" />
-        <VoiceOrb />
-        <WaveformRings />
-        <Environment preset="sunset" />
-      </Suspense>
-    </Canvas>
+      <Canvas
+        camera={{ position: [0, 0, 5.5], fov: 42 }}
+        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: true }}
+      >
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.4} />
+          <directionalLight position={[3, 5, 4]} intensity={1.4} color="#fff1d0" />
+          <directionalLight position={[-3, 2, -2]} intensity={0.6} color="#e9c275" />
+          <pointLight position={[0, 2, 3]} intensity={1} color="#f5d28a" />
+          <VoiceOrb pulse={pulse} />
+          <WaveformRings />
+          <Environment preset="sunset" />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 }
