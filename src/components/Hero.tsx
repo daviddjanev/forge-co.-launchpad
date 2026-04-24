@@ -36,11 +36,9 @@ export function Hero({ onContactClick }: HeroProps) {
                 <>Forge</>
               </SplitText>
               <br />
-              <em className="text-gradient-gold not-italic">
-                <SplitText delay={0.25} stagger={0.07}>
-                  <>conversations</>
-                </SplitText>
-              </em>
+              <SplitText delay={0.25} stagger={0.07} className="split-gradient-gold not-italic">
+                <>conversations</>
+              </SplitText>
               <br />
               <SplitText delay={0.55} stagger={0.07}>
                 <>that convert.</>
