@@ -1,28 +1,21 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Mic, MicOff, Loader2 } from "lucide-react";
-import { useConversation } from "@elevenlabs/react";
+import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { SilverSurferScene } from "./SilverSurferScene";
 
 const ELEVENLABS_AGENT_ID = "agent_2901kpzg0cdaf3vszchw7setsarr";
 
-/**
- * Voice agent demo block.
- *
- * Designed to be wired to ElevenLabs Conversational AI via the
- * `@elevenlabs/react` `useConversation` hook. The integration point is
- * intentionally isolated to the `start()` and `stop()` callbacks below —
- * once the user creates the agent, swap the placeholder logic for:
- *
- *   import { useConversation } from "@elevenlabs/react";
- *   const conversation = useConversation({ ... });
- *   await conversation.startSession({ agentId: "...", connectionType: "webrtc" });
- *
- * Until then, this renders a fully animated mock so the visual + UX are
- * production-ready.
- */
 type Status = "idle" | "connecting" | "live" | "ending";
 
 export function VoiceDemo() {
+  return (
+    <ConversationProvider>
+      <VoiceDemoInner />
+    </ConversationProvider>
+  );
+}
+
+function VoiceDemoInner() {
   const [status, setStatus] = useState<Status>("idle");
   const [seconds, setSeconds] = useState(0);
   const [bars, setBars] = useState<number[]>(() => Array(28).fill(0.1));
