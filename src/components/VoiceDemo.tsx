@@ -29,53 +29,77 @@ export function VoiceDemo() {
   const rafRef = useRef<number | null>(null);
   const startedAtRef = useRef<number>(0);
 
-  // Animate the visualizer + duration while "live"
+  const conversation = useConversation({
+    onConnect: () => setStatus("live"),
+    onDisconnect: () => {
+      setStatus("idle");
+      setSeconds(0);
+    },
+    onError: (err) => {
+      console.error("ElevenLabs error:", err);
+      setStatus("idle");
+    },
+  });
+
+  const isLive = status === "live";
+  const isConnecting = status === "connecting";
+
+  // Drive visualizer from real agent audio + duration timer
   useEffect(() => {
-    if (status !== "live") return;
+    if (!isLive) return;
     startedAtRef.current = performance.now();
     const tick = (now: number) => {
-      const t = (now - startedAtRef.current) / 1000;
-      setSeconds(Math.floor(t));
-      // Synth waveform — replace with conversation.getOutputByteFrequencyData()
-      const next = Array.from({ length: 28 }, (_, i) => {
-        const phase = i * 0.45;
-        const v =
-          Math.sin(t * 6 + phase) * 0.4 +
-          Math.sin(t * 13 + phase * 1.7) * 0.3 +
-          Math.sin(t * 21 + phase * 0.6) * 0.2;
-        return 0.15 + Math.abs(v) * 0.85;
-      });
-      setBars(next);
+      setSeconds(Math.floor((now - startedAtRef.current) / 1000));
+
+      // Pull real frequency data from the agent's output stream
+      const freq = conversation.getOutputByteFrequencyData?.();
+      if (freq && freq.length) {
+        const step = Math.floor(freq.length / 28) || 1;
+        const next = Array.from({ length: 28 }, (_, i) => {
+          const v = freq[i * step] ?? 0;
+          return 0.12 + (v / 255) * 0.88;
+        });
+        setBars(next);
+      } else {
+        // Fallback idle shimmer while waiting for first audio frame
+        const t = (now - startedAtRef.current) / 1000;
+        setBars(
+          Array.from({ length: 28 }, (_, i) => 0.15 + Math.abs(Math.sin(t * 4 + i * 0.4)) * 0.25),
+        );
+      }
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [status]);
+  }, [isLive, conversation]);
 
   const start = useCallback(async () => {
     setStatus("connecting");
     try {
-      // INTEGRATION POINT — when the ElevenLabs agent exists:
-      //   await navigator.mediaDevices.getUserMedia({ audio: true });
-      //   const { data } = await fetch("/api/elevenlabs/token").then(r => r.json());
-      //   await conversation.startSession({ conversationToken: data.token, connectionType: "webrtc" });
-      await new Promise((r) => setTimeout(r, 900));
-      setStatus("live");
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      await conversation.startSession({
+        agentId: ELEVENLABS_AGENT_ID,
+        connectionType: "webrtc",
+      });
+      // status flips to "live" via onConnect
     } catch (e) {
-      console.error(e);
+      console.error("Failed to start conversation:", e);
       setStatus("idle");
     }
-  }, []);
+  }, [conversation]);
 
   const stop = useCallback(async () => {
     setStatus("ending");
-    // INTEGRATION POINT: await conversation.endSession();
-    await new Promise((r) => setTimeout(r, 350));
+    try {
+      await conversation.endSession();
+    } catch (e) {
+      console.error(e);
+    }
     setStatus("idle");
     setSeconds(0);
-  }, []);
+  }, [conversation]);
 
   const isLive = status === "live";
   const isConnecting = status === "connecting";
