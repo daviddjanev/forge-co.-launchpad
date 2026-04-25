@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Mic, MicOff, Loader2 } from "lucide-react";
+import { useConversation } from "@elevenlabs/react";
 import { SilverSurferScene } from "./SilverSurferScene";
+
+const ELEVENLABS_AGENT_ID = "agent_2901kpzg0cdaf3vszchw7setsarr";
 
 /**
  * Voice agent demo block.
