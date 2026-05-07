@@ -32,24 +32,56 @@ export const Route = createFileRoute("/")({
 const services: ServicePanelData[] = [
   {
     number: "01",
-    kicker: "AI Voice Agents",
+    kicker: "3D Animated Websites",
     title: (
       <>
-        Voices that <em className="text-gradient-gold not-italic">close</em>,
-        not just answer.
+        Sites that make your{" "}
+        <em className="text-gradient-gold not-italic">competitors look flat.</em>
       </>
     ),
     description:
-      "Custom voice agents that book calls, qualify leads, and handle support 24/7 — sounding like the best person on your team, not a bot reading a script.",
+      "High-impact, animated single-page websites built for local businesses. Custom motion, bold visuals, and a design that makes you the obvious choice in your city.",
     businessValue: {
-      heading: "Capture every lead, day and night.",
+      heading: "Stand out before they even read a word.",
+      body: "",
+      tags: ["First impression", "More calls", "More walk-ins"],
+    },
+    ourAdvantage: {
+      heading: "3D motion nobody else in the region offers.",
+      body: "",
+      tags: ["Unique market", "Custom animation", "Premium feel"],
+    },
+    executionTools: {
+      heading: "Modern web stack, fast delivery.",
+      body: "",
+      tags: ["React", "Three.js", "GSAP", "Vercel"],
+    },
+    useCases: {
+      heading: "Restaurants · Gyms · Salons · Shops.",
+      body: "",
+      tags: ["Local biz", "Launch", "Rebrand", "Portfolio"],
+    },
+  },
+  {
+    number: "02",
+    kicker: "AI Voice Agents",
+    title: (
+      <>
+        Answers every call.{" "}
+        <em className="text-gradient-gold not-italic">Books. Takes orders. Never sleeps.</em>
+      </>
+    ),
+    description:
+      "A fully automated AI that handles your inbound calls — takes orders, books tables, answers FAQs and qualifies leads 24/7, sounding like your best employee.",
+    businessValue: {
+      heading: "Zero missed calls. Zero extra staff.",
       body: "",
       tags: ["24/7", "<2s pickup", "Books direct"],
     },
     ourAdvantage: {
-      heading: "Brand-true voice & tone.",
+      heading: "Trained on your exact business.",
       body: "",
-      tags: ["Custom cadence", "On-brand", "Human-like"],
+      tags: ["Custom script", "Your voice", "Your brand"],
     },
     executionTools: {
       heading: "Best-in-class voice stack.",
@@ -57,73 +89,73 @@ const services: ServicePanelData[] = [
       tags: ["Vapi", "ElevenLabs", "Twilio", "n8n"],
     },
     useCases: {
-      heading: "Real-estate · Clinics · Agencies.",
+      heading: "Restaurants · Gyms · Clinics · Agencies.",
       body: "",
-      tags: ["Inbound", "Booking", "Triage", "Follow-ups"],
-    },
-  },
-  {
-    number: "02",
-    kicker: "Web Design & Build",
-    title: (
-      <>
-        Sites that look <em className="text-gradient-gold not-italic">expensive</em>
-        — and perform like it.
-      </>
-    ),
-    description:
-      "Editorial-grade websites engineered for speed and conversion. Custom motion, considered typography, and a CMS your team will actually enjoy using.",
-    businessValue: {
-      heading: "Premium positioning, instantly.",
-      body: "",
-      tags: ["Higher AOV", "Better close", "Category leader"],
-    },
-    ourAdvantage: {
-      heading: "Designed in-house, end-to-end.",
-      body: "",
-      tags: ["Strategy", "Art direction", "Engineering"],
-    },
-    executionTools: {
-      heading: "Modern, performant stack.",
-      body: "",
-      tags: ["React", "TanStack", "Three.js", "Sanity"],
-    },
-    useCases: {
-      heading: "Marketing · Portfolio · DTC.",
-      body: "",
-      tags: ["Launches", "Rebrands", "Narrative", "Ecom"],
+      tags: ["Inbound", "Booking", "Orders", "Follow-ups"],
     },
   },
   {
     number: "03",
-    kicker: "Brand & Automation",
+    kicker: "After-Hours AI Receptionist",
     title: (
       <>
-        The <em className="text-gradient-gold not-italic">connective tissue</em>
-        between brand and ops.
+        You close at 10.{" "}
+        <em className="text-gradient-gold not-italic">We answer at 11.</em>
       </>
     ),
     description:
-      "Identity systems, automation pipelines and lifecycle flows that make your business feel coherent — from a cold DM to a renewal email.",
+      "For businesses that need a human touch during the day — the AI steps in after hours. Takes names, numbers, and requests so you wake up to warm leads ready to call back.",
     businessValue: {
-      heading: "Less manual work, more margin.",
+      heading: "Never lose a customer to a missed call again.",
       body: "",
-      tags: ["Lead-gen", "Onboarding", "Reporting"],
+      tags: ["After hours", "Warm leads", "Morning list"],
     },
     ourAdvantage: {
-      heading: "A studio that thinks in systems.",
+      heading: "Feels personal. Costs nothing extra.",
       body: "",
-      tags: ["Brand + ops", "Coherent", "Reinforcing"],
+      tags: ["Human tone", "Low complexity", "Easy setup"],
     },
     executionTools: {
-      heading: "Lightweight automation stack.",
+      heading: "Lightweight, reliable stack.",
       body: "",
-      tags: ["Figma", "n8n", "Make", "Notion", "Linear"],
+      tags: ["Vapi", "Twilio", "WhatsApp notify", "Make"],
     },
     useCases: {
-      heading: "Rebrands · Onboarding · Reporting.",
+      heading: "Tattoo shops · Lawyers · Consultants · Salons.",
       body: "",
-      tags: ["Identity", "Workflows", "KPIs", "Knowledge"],
+      tags: ["After hours", "Lead capture", "Callbacks", "Any biz"],
+    },
+  },
+  {
+    number: "04",
+    kicker: "Lead Generation Bot",
+    title: (
+      <>
+        Turns visitors into{" "}
+        <em className="text-gradient-gold not-italic">leads while you sleep.</em>
+      </>
+    ),
+    description:
+      "A chat widget on your website or Facebook page that engages visitors, asks the right questions, and sends their contact info straight to your phone — automatically.",
+    businessValue: {
+      heading: "A salesperson that never clocks out.",
+      body: "",
+      tags: ["More leads", "Auto-qualify", "Instant notify"],
+    },
+    ourAdvantage: {
+      heading: "Set up once. Runs forever.",
+      body: "",
+      tags: ["Zero maintenance", "Always on", "Scalable"],
+    },
+    executionTools: {
+      heading: "Proven automation stack.",
+      body: "",
+      tags: ["ManyChat", "Voiceflow", "Make", "WhatsApp"],
+    },
+    useCases: {
+      heading: "Any business with a website or Facebook.",
+      body: "",
+      tags: ["Restaurants", "Gyms", "Ecom", "Services"],
     },
   },
 ];
@@ -140,11 +172,11 @@ function Index() {
 
       <Marquee
         items={[
+          "3D Animated Websites",
           "AI Voice Agents",
-          "Editorial Web Design",
-          "Brand Systems",
-          "Conversion Engineering",
-          "Lifecycle Automation",
+          "After-Hours AI Receptionist",
+          "Lead Generation Bot",
+          "Local Business Automation",
           "Three.js Motion",
         ]}
       />
@@ -157,7 +189,7 @@ function Index() {
                 ⟶ What we forge
               </div>
               <h2 className="font-display text-5xl md:text-7xl leading-[0.95] mt-4 max-w-3xl">
-                Three disciplines.
+                Four services.
                 <br />
                 <em className="text-gradient-gold not-italic">One studio.</em>
               </h2>
