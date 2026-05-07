@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ThemeToggle } from "./ThemeToggle";
 import { BrandMark } from "./BrandMark";
 
@@ -26,6 +27,9 @@ export function SiteHeader({ onContactClick }: SiteHeaderProps) {
           <a href="#work" className="link-reveal hover:text-foreground transition-colors">
             Work
           </a>
+          <Link to="/quote" className="link-reveal hover:text-foreground transition-colors text-gold">
+            Get a Quote
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
